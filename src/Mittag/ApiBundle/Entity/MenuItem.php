@@ -53,4 +53,13 @@ class MenuItem {
      */
     private $price;
 
+    /**
+     * @var date;
+     *
+     * @ORM\Column(name="date", type="date")
+     * @Assert\Date()
+     *
+     */
+    private $date;
+
 } 
