@@ -1,0 +1,38 @@
+# Default files
+/app/cache/*
+/app/logs/*
+/build/
+/bin/
+/composer.phar
+
+# IDE
+.idea
+
+#DOCTRINE
+.php~
+
+# dirs to generate
+app/cache
+app/logs
+web/uploads
+
+# auto generated files
+app/bootstrap.php.cache
+app/check.php
+app/SymfonyRequirements.php
+vendor/
+web/bundles
+web/js
+web/css
+web/config.php
+
+# private credentials
+app/config/parameters.yml
+
+# lock files
+composer.lock
+bin/phpunit
+bin/behat
+
+# Composer
+composer.phar
