@@ -1,5 +1,5 @@
-mittag_api:
-    resource: "@MittagApiBundle/Controller/"
+zmittapp_api:
+    resource: "@ZmittappApiBundle/Controller/"
     type:     annotation
     prefix:   /
 

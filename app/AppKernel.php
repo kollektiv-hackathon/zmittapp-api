@@ -23,7 +23,7 @@ class AppKernel extends Kernel
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new Hautelook\TemplatedUriBundle\HautelookTemplatedUriBundle(),
             new Bazinga\Bundle\RestExtraBundle\BazingaRestExtraBundle(),
-            new Mittag\ApiBundle\MittagApiBundle(),
+            new Zmittapp\ApiBundle\ZmittappApiBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

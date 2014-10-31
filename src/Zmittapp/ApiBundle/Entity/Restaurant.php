@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Mittag\ApiBundle\Entity;
+namespace Zmittapp\ApiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Exclude;
@@ -18,12 +18,12 @@ use JMS\Serializer\Annotation\Groups;
 
 
 /**
- * MenuItem
+ * Restaurant
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class MenuItem {
+class Restaurant {
 
     /**
      * @var integer
@@ -36,6 +36,14 @@ class MenuItem {
     private $id;
 
     /**
+     * @var array
+     *
+     * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="restaurant")
+     *
+     */
+    private $menuItems;
+
+    /**
      * @var string;
      *
      * @ORM\Column(name="name", type="string")
@@ -44,22 +52,5 @@ class MenuItem {
      */
     private $name;
 
-    /**
-     * @var string;
-     *
-     * @ORM\Column(name="price", type="decimal")
-     * @Assert\NotBlank(message="Price is missing!")
-     *
-     */
-    private $price;
-
-    /**
-     * @var date;
-     *
-     * @ORM\Column(name="date", type="date")
-     * @Assert\Date()
-     *
-     */
-    private $date;
 
 } 
