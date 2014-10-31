@@ -103,4 +103,198 @@ class MenuItem {
      *
      */
     private $vegan;
-} 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set appetizer
+     *
+     * @param string $appetizer
+     * @return MenuItem
+     */
+    public function setAppetizer($appetizer)
+    {
+        $this->appetizer = $appetizer;
+
+        return $this;
+    }
+
+    /**
+     * Get appetizer
+     *
+     * @return string 
+     */
+    public function getAppetizer()
+    {
+        return $this->appetizer;
+    }
+
+    /**
+     * Set mainCourse
+     *
+     * @param string $mainCourse
+     * @return MenuItem
+     */
+    public function setMainCourse($mainCourse)
+    {
+        $this->mainCourse = $mainCourse;
+
+        return $this;
+    }
+
+    /**
+     * Get mainCourse
+     *
+     * @return string 
+     */
+    public function getMainCourse()
+    {
+        return $this->mainCourse;
+    }
+
+    /**
+     * Set desert
+     *
+     * @param string $desert
+     * @return MenuItem
+     */
+    public function setDesert($desert)
+    {
+        $this->desert = $desert;
+
+        return $this;
+    }
+
+    /**
+     * Get desert
+     *
+     * @return string 
+     */
+    public function getDesert()
+    {
+        return $this->desert;
+    }
+
+    /**
+     * Set price
+     *
+     * @param string $price
+     * @return MenuItem
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return string 
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     * @return MenuItem
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime 
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set vegetarian
+     *
+     * @param boolean $vegetarian
+     * @return MenuItem
+     */
+    public function setVegetarian($vegetarian)
+    {
+        $this->vegetarian = $vegetarian;
+
+        return $this;
+    }
+
+    /**
+     * Get vegetarian
+     *
+     * @return boolean 
+     */
+    public function getVegetarian()
+    {
+        return $this->vegetarian;
+    }
+
+    /**
+     * Set vegan
+     *
+     * @param boolean $vegan
+     * @return MenuItem
+     */
+    public function setVegan($vegan)
+    {
+        $this->vegan = $vegan;
+
+        return $this;
+    }
+
+    /**
+     * Get vegan
+     *
+     * @return boolean 
+     */
+    public function getVegan()
+    {
+        return $this->vegan;
+    }
+
+    /**
+     * Set restaurant
+     *
+     * @param \Zmittapp\ApiBundle\Entity\Restaurant $restaurant
+     * @return MenuItem
+     */
+    public function setRestaurant(\Zmittapp\ApiBundle\Entity\Restaurant $restaurant = null)
+    {
+        $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    /**
+     * Get restaurant
+     *
+     * @return \Zmittapp\ApiBundle\Entity\Restaurant 
+     */
+    public function getRestaurant()
+    {
+        return $this->restaurant;
+    }
+}
