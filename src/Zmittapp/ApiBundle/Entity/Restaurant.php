@@ -36,6 +36,11 @@ class Restaurant {
     private $id;
 
     /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="restaurants")
+     **/
+    private $users;
+
+    /**
      * @var array
      *
      * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="restaurant")
@@ -52,5 +57,43 @@ class Restaurant {
      */
     private $name;
 
+    /**
+     * @var string;
+     *
+     * @ORM\Column(name="phone", type="string")
+     * @Assert\NotBlank(message="Phone is missing!")
+     *
+     */
+    private $phone;
 
+    /**
+     * @var string;
+     *
+     * @ORM\Column(name="email", type="string")
+     * @Assert\NotBlank(message="Email is missing!")
+     *
+     */
+    private $email;
+
+    /**
+     * @var Decimal;
+     *
+     * @ORM\Column(name="lat", type="decimal")
+     * @Assert\NotBlank(message="lat is missing!")
+     *
+     */
+    private $lat;
+
+    /**
+     * @var Decimal;
+     *
+     * @ORM\Column(name="long", type="decimal")
+     * @Assert\NotBlank(message="long is missing!")
+     *
+     */
+    private $long;
+
+    public function __construct() {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 } 

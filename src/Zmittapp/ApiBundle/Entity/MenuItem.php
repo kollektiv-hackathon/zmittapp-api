@@ -45,11 +45,29 @@ class MenuItem {
     /**
      * @var string;
      *
-     * @ORM\Column(name="name", type="string")
-     * @Assert\NotBlank(message="Name is missing!")
+     * @ORM\Column(name="appetizer", type="string")
+     * @Assert\NotBlank(message="Appetizer is missing!")
      *
      */
-    private $name;
+    private $appetizer;
+
+    /**
+     * @var string;
+     *
+     * @ORM\Column(name="maincourse", type="string")
+     * @Assert\NotBlank(message="Main course is missing!")
+     *
+     */
+    private $mainCourse;
+
+    /**
+     * @var string;
+     *
+     * @ORM\Column(name="desert", type="string")
+     * @Assert\NotBlank(message="Desert is missing!")
+     *
+     */
+    private $desert;
 
     /**
      * @var string;
@@ -69,4 +87,20 @@ class MenuItem {
      */
     private $date;
 
+
+    /**
+     * @var Boolean;
+     *
+     * @ORM\Column(name="vegetarian", type="boolean", nullable=true)
+     *
+     */
+    private $vegetarian;
+
+    /**
+     * @var Boolean;
+     *
+     * @ORM\Column(name="vegan", type="boolean", nullable=true)
+     *
+     */
+    private $vegan;
 } 
