@@ -1,3 +1,3 @@
-Zmittag REST API
+zmittapp REST API
 ========================
 
