@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Zmittapp\Form\Handler;
+namespace Zmittapp\ApiBundle\Form\Handler;
 
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;

@@ -95,6 +95,10 @@ class Restaurant {
      */
     private $lon;
 
+    public function __toString(){
+        return $this->getName();
+    }
+
     public function __construct() {
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
     }

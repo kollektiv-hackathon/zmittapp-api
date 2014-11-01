@@ -14,8 +14,10 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
+use Zmittapp\ApiBundle\Entity\MenuItem;
 use Zmittapp\ApiBundle\Entity\Restaurant;
 use Zmittapp\ApiBundle\Exception\InvalidFormException;
+use Zmittapp\ApiBundle\Form\Type\MenuItemType;
 use Zmittapp\ApiBundle\Form\Type\RestaurantType;
 
 /**
@@ -26,7 +28,7 @@ use Zmittapp\ApiBundle\Form\Type\RestaurantType;
 class RestaurantController extends FOSRestController
 {
     /**
-     * Unsubscribe a restaurant from favorites (as a user)
+     * List all restaurants with distance to users current location
      *
      * @ApiDoc(
      *   resource = true,
@@ -124,9 +126,8 @@ class RestaurantController extends FOSRestController
      */
     public function postRestaurantsAction(Request $request){
         try {
-            $formHandler = $this->get('zmittapp_api.form.handler.create_restaurant');
             $form = $this->createForm(new RestaurantType(), new Restaurant(), array('method' => 'POST'));
-            $newRestaurant = $formHandler->handle($form, $request);
+            $newRestaurant = $this->get('zmittapp_api.form_handler.restaurant')->handle($form, $request);
             $routeOptions = array(
                 'id' => $newRestaurant->getId(),
                 '_format' => $request->get('_format')
@@ -159,6 +160,37 @@ class RestaurantController extends FOSRestController
         return $restaurant->getMenuItems();
     }
 
+    /**
+     * Create a new Menu Item
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   input = "Zmittapp\ApiBundle\Form\Type\MenuItemType",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     400 = "Returned when the form has errors"
+     *   }
+     * )
+     *
+     * @Route("/{id}/menuitems", name="restaurant_menuitem_post", defaults={"_format" = "json"})
+     * @Method("POST")
+     * @Rest\View
+     *
+     */
+    public function postMenuItemAction(Request $request){
+        try {
+            $form = $this->createForm(new MenuItemType(), new MenuItem(), array('method' => 'POST'));
+            $newRestaurant = $this->get('zmittapp_api.form_handler.menuitem')->handle($form, $request);
+            $routeOptions = array(
+                'id' => $newRestaurant->getId(),
+                '_format' => $request->get('_format')
+            );
+            return $this->routeRedirectView('restaurant_get', $routeOptions, Codes::HTTP_CREATED);
+        }catch (InvalidFormException $exception) {
+            return $exception->getForm();
+        }
+    }
+
 
     /**
      * Subscribe a restaurant to favorites (as a user)
@@ -172,7 +204,7 @@ class RestaurantController extends FOSRestController
      *
      * @return array
      *
-     * @Method("GET")
+     * @Method("PUT")
      * @Route("/{id}/subscribe/{userId}", name="restaurant_subscribe")
      * @Rest\View()
      */
@@ -203,7 +235,7 @@ class RestaurantController extends FOSRestController
      *
      * @return array
      *
-     * @Method("GET")
+     * @Method("PUT")
      * @Route("/{id}/unsubscribe/{userId}", name="restaurant_unsubscribe")
      * @Rest\View()
      */

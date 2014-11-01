@@ -83,7 +83,7 @@ class MenuItem {
     /**
      * @var date;
      *
-     * @ORM\Column(name="date", type="date")
+     * @ORM\Column(name="date", type="datetime")
      * @Assert\Date()
      *
      */
@@ -216,7 +216,7 @@ class MenuItem {
      */
     public function setDate($date)
     {
-        $this->date = $date;
+        $this->date = new \DateTime($date);
 
         return $this;
     }
