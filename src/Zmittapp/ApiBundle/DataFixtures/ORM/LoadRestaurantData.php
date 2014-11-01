@@ -42,7 +42,7 @@ class LoadRestaurantData extends AbstractFixture implements OrderedFixtureInterf
         $manager->persist($restaurant2);
 
         $menuItem1 = new MenuItem();
-        $menuItem1->setDate(new \DateTime());
+        $menuItem1->setDate('');
         $menuItem1->setAppetizer('Gemischter Salat');
         $menuItem1->setMainCourse('Kalbsgeschnetzeltes mit Rösti');
         $menuItem1->setDesert('Schokoladen Mousse');
