@@ -14,7 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Zmittapp\ApiBundle\Entity\Restaurant;
-use Zmittapp\Exception\InvalidFormException;
+use Zmittapp\ApiBundle\Exception\InvalidFormException;
 use Zmittapp\Form\Type\RestaurantType;
 
 /**
@@ -84,22 +84,7 @@ class RestaurantController extends FOSRestController
      *
      */
     public function postRestaurantsAction(Request $request){
-        try {
-            $formHandler = $this->get('zmittapp_api.form.handler.create_restaurant');
 
-            $form = $this->createForm(new RestaurantType(), new Restaurant(), array('method' => 'POST'));
-            $newRestaurant = $formHandler->handle($form, $request);
-
-            $routeOptions = array(
-                'id' => $newRestaurant->getId(),
-                '_format' => $request->get('_format')
-            );
-
-            return $this->routeRedirectView('restaurant_get', $routeOptions, Codes::HTTP_CREATED);
-
-        }catch (InvalidFormException $exception) {
-            return $exception->getForm();
-        }
     }
 
     /**
@@ -123,5 +108,92 @@ class RestaurantController extends FOSRestController
         $restaurant = $this->get('zmittapp_api.domain_manager.restaurant')->find($id);
         return $restaurant->getMenuItems();
     }
+
+
+    /**
+     * Subscribe a restaurant to favorites (as a user)
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   statusCodes = {
+     *     200 = "Returned when successful"
+     *   }
+     * )
+     *
+     * @return array
+     *
+     * @Method("GET")
+     * @Route("/{id}/subscribe/{userId}", name="restaurant_subscribe")
+     * @Rest\View()
+     */
+    public function subscribeUserAction($id, $userId)
+    {
+        $restaurantManager = $this->get('zmittapp_api.domain_manager.restaurant');
+        $restaurant = $restaurantManager->find($id);
+
+        $userManager = $this->get('zmittapp_api.domain_manager.user');
+        $user = $userManager->find($userId);
+
+        //TODO: checks
+        $user->addRestaurant($restaurant);
+        $userManager->create($user);
+
+        return true;
+    }
+
+    /**
+     * Unsubscribe a restaurant from favorites (as a user)
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   statusCodes = {
+     *     200 = "Returned when successful"
+     *   }
+     * )
+     *
+     * @return array
+     *
+     * @Method("GET")
+     * @Route("/{id}/unsubscribe/{userId}", name="restaurant_unsubscribe")
+     * @Rest\View()
+     */
+    public function unsubscribeUserAction($id, $userId)
+    {
+        $restaurantManager = $this->get('zmittapp_api.domain_manager.restaurant');
+        $restaurant = $restaurantManager->find($id);
+
+        $userManager = $this->get('zmittapp_api.domain_manager.user');
+        $user = $userManager->find($userId);
+
+        //TODO: checks
+        $user->removeRestaurant($restaurant);
+        $userManager->create($user);
+
+        return true;
+    }
+
+    /**
+     * Unsubscribe a restaurant from favorites (as a user)
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   statusCodes = {
+     *     200 = "Returned when successful"
+     *   }
+     * )
+     *
+     * @Rest\QueryParam(name="lat", requirements="\d+", nullable=false, description="Latitude of current user location.")
+     * @Rest\QueryParam(name="lon", requirements="\d+", nullable=false, description="Longitude of current user location.")
+     * @return array
+     *
+     * @Method("GET")
+     * @Route("/location", name="restaurant_by_location")
+     * @Rest\View()
+     */
+    public function findByLocationAction($userId)
+    {
+        return null;
+    }
+
 
 }

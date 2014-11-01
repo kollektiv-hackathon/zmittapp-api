@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Zmittapp\Exception;
+namespace Zmittapp\ApiBundle\Exception;
 
 
 class InvalidFormException extends \RuntimeException

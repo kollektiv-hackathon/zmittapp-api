@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Zmittapp\Form\Type;
+namespace Zmittapp\ApiBundle\Form\Type;
 
 
 use Symfony\Component\Form\AbstractType;
