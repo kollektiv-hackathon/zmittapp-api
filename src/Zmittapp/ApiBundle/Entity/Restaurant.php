@@ -37,6 +37,7 @@ class Restaurant {
 
     /**
      * @ORM\ManyToMany(targetEntity="User", mappedBy="restaurants")
+     * @Exclude
      **/
     private $users;
 
@@ -44,6 +45,7 @@ class Restaurant {
      * @var array
      *
      * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="restaurant")
+     * @Exclude
      *
      */
     private $menuItems;

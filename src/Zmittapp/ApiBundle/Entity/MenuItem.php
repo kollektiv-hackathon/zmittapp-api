@@ -39,6 +39,8 @@ class MenuItem {
      * @ORM\ManyToOne(targetEntity="Restaurant", inversedBy="menuItems")
      * @ORM\JoinColumn(name="restaurant_id", referencedColumnName="id")
      *
+     * @Exclude
+     *
      */
     private $restaurant;
 
@@ -70,7 +72,7 @@ class MenuItem {
     private $desert;
 
     /**
-     * @var string;
+     * @var decimal;
      *
      * @ORM\Column(name="price", type="decimal")
      * @Assert\NotBlank(message="Price is missing!")
@@ -94,7 +96,7 @@ class MenuItem {
      * @ORM\Column(name="vegetarian", type="boolean", nullable=true)
      *
      */
-    private $vegetarian;
+    private $vegetarian = false;
 
     /**
      * @var Boolean;
@@ -102,7 +104,7 @@ class MenuItem {
      * @ORM\Column(name="vegan", type="boolean", nullable=true)
      *
      */
-    private $vegan;
+    private $vegan = false;
 
     /**
      * Get id
