@@ -80,7 +80,7 @@ class Restaurant {
     /**
      * @var Decimal;
      *
-     * @ORM\Column(name="lat", type="decimal")
+     * @ORM\Column(name="lat", type="decimal", scale=7)
      * @Assert\NotBlank(message="lat is missing!")
      *
      */
@@ -89,7 +89,7 @@ class Restaurant {
     /**
      * @var Decimal;
      *
-     * @ORM\Column(name="lon", type="decimal")
+     * @ORM\Column(name="lon", type="decimal", scale=7)
      * @Assert\NotBlank(message="long is missing!")
      *
      */

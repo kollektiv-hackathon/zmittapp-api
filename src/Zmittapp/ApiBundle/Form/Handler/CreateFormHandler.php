@@ -13,7 +13,7 @@ namespace Zmittapp\Form\Handler;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Zmittapp\ApiBundle\DomainManager\DefaultManager;
-use Zmittapp\Exception\InvalidFormException;
+use Zmittapp\ApiBundle\Exception\InvalidFormException;
 
 class CreateFormHandler {
     private $manager;
