@@ -29,7 +29,7 @@ use Zmittapp\ApiBundle\Form\Type\RestaurantType;
 class RestaurantController extends FOSRestController
 {
     /**
-     * List all restaurants with distance to users current location
+     * List all restaurants with it's distance to users current location
      *
      * @ApiDoc(
      *   resource = true,
@@ -155,7 +155,7 @@ class RestaurantController extends FOSRestController
      * @Method("PUT")
      * @Rest\View
      */
-    public function putAction(Request $request, $id){
+    public function putRestaurantsAction(Request $request, $id){
         try {
             $manager = $this->get('zmittapp_api.domain_manager.restaurant');
             $formHandler = $this->get('zmittapp_api.form_handler.restaurant');
@@ -236,6 +236,48 @@ class RestaurantController extends FOSRestController
         }
     }
 
+    /**
+     * Update an existing menu item
+     *
+     * @ApiDoc(
+     *  input = "Zmittapp\ApiBundle\Form\Type\MenuItemType",
+     *  statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the Restaurant not found"
+     *  }
+     * )
+     *
+     * @Route("/{id}/menuitems/{itemId}", name="restaurant_put_menuitems", defaults={"_format" = "json"})
+     * @Method("PUT")
+     * @Rest\View
+     */
+    public function putMenuItemsAction(Request $request, $id, $itemId){
+        try {
+            $manager = $this->get('zmittapp_api.domain_manager.menuitem');
+            $formHandler = $this->get('zmittapp_api.form_handler.menuitem');
+
+            if (!($object = $manager->get($itemId))) {
+                $statusCode = Codes::HTTP_CREATED;
+                $form = $this->createForm(new MenuItemType(), new MenuItem(), array('method' => 'POST'));
+            } else {
+                $statusCode = Codes::HTTP_NO_CONTENT;
+                $form = $this->createForm(new MenuItemType(), $object, array('method' => 'PUT'));
+            }
+
+            $object = $formHandler->handle($form, $request);
+
+            $routeOptions = array(
+                'id' => $object->getId(),
+                '_format' => $request->get('_format')
+            );
+
+            return $this->routeRedirectView('restaurant_get_menuitems', $routeOptions, $statusCode);
+
+        } catch (InvalidFormException $exception) {
+            return $exception->getForm();
+        }
+    }
+
 
     /**
      * Subscribe a restaurant to favorites (as a user)
@@ -298,7 +340,6 @@ class RestaurantController extends FOSRestController
 
         return true;
     }
-
 
 
     private function distance($lat1, $lon1, $lat2, $lon2) {

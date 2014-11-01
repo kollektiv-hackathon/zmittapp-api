@@ -84,7 +84,7 @@ class MenuItem {
      * @var date;
      *
      * @ORM\Column(name="date", type="datetime")
-     * @Assert\Date()
+     * @Assert\DateTime()
      *
      */
     private $date;
