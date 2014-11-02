@@ -15,9 +15,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Zmittapp\ApiBundle\Entity\MenuItem;
 use Zmittapp\ApiBundle\Entity\Restaurant;
 use Zmittapp\ApiBundle\Exception\InvalidFormException;
+use Zmittapp\ApiBundle\Exception\RessourceNotFoundException;
 use Zmittapp\ApiBundle\Form\Type\MenuItemType;
 use Zmittapp\ApiBundle\Form\Type\RestaurantType;
 
@@ -202,6 +204,9 @@ class RestaurantController extends FOSRestController
     public function getMenuItemsAction($id)
     {
         $restaurant = $this->get('zmittapp_api.domain_manager.restaurant')->find($id);
+        if(!$restaurant){
+            throw new NotFoundHttpException('Restaurant not found with id: '. $id);
+        }
         return $restaurant->getMenuItems();
     }
 
@@ -297,11 +302,16 @@ class RestaurantController extends FOSRestController
      */
     public function subscribeUserAction($id, $userId)
     {
-        $restaurantManager = $this->get('zmittapp_api.domain_manager.restaurant');
-        $restaurant = $restaurantManager->find($id);
+        $restaurant = $this->get('zmittapp_api.domain_manager.restaurant')->find($id);
+        if(!$restaurant){
+            throw new RessourceNotFoundException('Restaurant', $id);
+        }
 
         $userManager = $this->get('zmittapp_api.domain_manager.user');
         $user = $userManager->find($userId);
+        if(!$user){
+            throw new RessourceNotFoundException('User', $userId);
+        }
 
         //TODO: checks
         $user->addRestaurant($restaurant);
@@ -328,15 +338,20 @@ class RestaurantController extends FOSRestController
      */
     public function unsubscribeUserAction($id, $userId)
     {
-        $restaurantManager = $this->get('zmittapp_api.domain_manager.restaurant');
-        $restaurant = $restaurantManager->find($id);
+        $restaurant = $this->get('zmittapp_api.domain_manager.restaurant')->find($id);
+        if(!$restaurant){
+            throw new RessourceNotFoundException('Restaurant', $id);
+        }
 
         $userManager = $this->get('zmittapp_api.domain_manager.user');
         $user = $userManager->find($userId);
+        if(!$user){
+            throw new RessourceNotFoundException('User', $userId);
+        }
 
         //TODO: checks
         $user->removeRestaurant($restaurant);
-        $userManager->create($user);
+        $userManager->save($user);
 
         return true;
     }

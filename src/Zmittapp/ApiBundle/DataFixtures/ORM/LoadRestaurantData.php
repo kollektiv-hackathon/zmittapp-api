@@ -49,9 +49,20 @@ class LoadRestaurantData extends AbstractFixture implements OrderedFixtureInterf
         $menuItem1->setPrice(65.50);
         $menuItem1->setVegan(false);
         $menuItem1->setVegetarian(false);
-        $menuItem1->setRestaurant($restaurant2);
+        $menuItem1->setRestaurant($restaurant);
+
+        $menuItem2 = new MenuItem();
+        $menuItem2->setDate('');
+        $menuItem2->setAppetizer('Suppe');
+        $menuItem2->setMainCourse('Tofu Tatar');
+        $menuItem2->setDesert('Apfel');
+        $menuItem2->setPrice(19.95);
+        $menuItem2->setVegan(false);
+        $menuItem2->setVegetarian(true);
+        $menuItem2->setRestaurant($restaurant);
 
         $manager->persist($menuItem1);
+        $manager->persist($menuItem2);
 
         $manager->flush();
     }

@@ -42,6 +42,11 @@ class DefaultManager {
         $this->entityManager->flush();
     }
 
+    public function save($entity){
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
+    }
+
     public function delete($id){
         $entity = $this->find($id);
         if(!$entity){
