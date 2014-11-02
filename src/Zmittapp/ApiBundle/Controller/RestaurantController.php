@@ -107,7 +107,11 @@ class RestaurantController extends FOSRestController
      */
     public function getAllRestaurantsAction($id)
     {
-        return $this->get('zmittapp_api.domain_manager.restaurant')->find($id);
+        $restaurant = $this->get('zmittapp_api.domain_manager.restaurant')->find($id);
+        if(!$restaurant){
+            throw new NotFoundHttpException('Restaurant not found with id: '. $id);
+        }
+        return $restaurant;
     }
 
     /**
