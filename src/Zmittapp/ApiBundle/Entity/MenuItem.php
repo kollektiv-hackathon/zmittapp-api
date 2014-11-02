@@ -74,7 +74,7 @@ class MenuItem {
     /**
      * @var decimal;
      *
-     * @ORM\Column(name="price", type="decimal")
+     * @ORM\Column(name="price", type="decimal", scale=2)
      * @Assert\NotBlank(message="Price is missing!")
      *
      */
