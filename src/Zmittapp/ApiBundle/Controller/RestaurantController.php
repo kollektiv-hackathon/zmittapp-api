@@ -289,6 +289,37 @@ class RestaurantController extends FOSRestController
 
 
     /**
+     *
+     * @ApiDoc(
+     *  description="Deletes an existing menuitem",
+     *  statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the menuitem not found"
+     *  }
+     * )
+     *
+     * @Route("/{id}/menuitems/{itemId}", name="restaurant_menuitems_delete", defaults={"_format" = "json"})
+     * @Method("DELETE")
+     *
+     */
+    public function deleteAction(Request $request, $itemId) {
+        $manager = $this->get('zmittapp_api.domain_manager.menuitem');
+        $obj = $manager->find($itemId);
+        if(!$obj){
+            throw new RessourceNotFoundException('MenuItem', $itemId);
+        }
+        $manager->delete($itemId);
+
+        $routeOptions = array(
+            'id' => $obj->getRestaurant()->getId(),
+            '_format' => $request->get('_format')
+        );
+
+        return $this->routeRedirectView('restaurant_get', $routeOptions, Codes::HTTP_NO_CONTENT);
+    }
+
+
+    /**
      * Subscribe a restaurant to favorites (as a user)
      *
      * @ApiDoc(

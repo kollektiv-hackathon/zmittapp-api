@@ -11,9 +11,8 @@
 namespace Zmittapp\ApiBundle\DomainManager;
 
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\ORMException;
 use Symfony\Component\HttpFoundation\ParameterBag;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Zmittapp\ApiBundle\Exception\RessourceNotFoundException;
 
 
 class DefaultManager {
@@ -50,9 +49,9 @@ class DefaultManager {
     public function delete($id){
         $entity = $this->find($id);
         if(!$entity){
-            throw new NotFoundHttpException('Entity not found');
+            throw new RessourceNotFoundException('Entity', $id);
         }
-
-        $this->create($entity);
+        $this->entityManager->remove($entity);
+        $this->entityManager->flush();
     }
 } 
