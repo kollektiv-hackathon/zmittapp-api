@@ -1,8 +1,16 @@
 {
-    "name": "gimler/symfony-rest-edition",
+    "name": "zmittapp/zmittapp-api",
     "license": "MIT",
     "type": "project",
-    "description": "The \"Symfony REST Edition\" distribution",
+    "description": "The \"Zmittapp\" API",
+    "homepage": "http://zmittapp.ch",
+    "authors": [
+        {
+            "name": "Marc Juchli",
+            "email": "mail@marcjuch.li",
+            "homepage": "http://marcjuch.li"
+        }
+    ],
     "autoload": {
         "psr-0": { "": "src/" }
     },
