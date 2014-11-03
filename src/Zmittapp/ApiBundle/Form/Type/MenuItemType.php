@@ -24,7 +24,9 @@ class MenuItemType extends AbstractType {
             ->add('main_course')
             ->add('desert')
             ->add('price')
-            ->add('date')
+            ->add('date', 'datetime', array(
+                'widget' => 'single_text',
+            ))
             ->add('vegetarian')
             ->add('vegan')
             ->add('restaurant', 'entity', array(
