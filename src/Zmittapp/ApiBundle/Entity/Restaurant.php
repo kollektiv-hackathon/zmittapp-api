@@ -103,6 +103,14 @@ class Restaurant {
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    public function castToRestaurantLocation() {
+        $obj = new RestaurantLocation();
+        foreach (get_object_vars($this) as $key => $name) {
+            $obj->$key = $name;
+        }
+        return $obj;
+    }
+
     /**
      * Get id
      *

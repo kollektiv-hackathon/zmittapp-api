@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Zmittapp\ApiBundle\Entity\MenuItem;
 use Zmittapp\ApiBundle\Entity\Restaurant;
+use Zmittapp\ApiBundle\Entity\RestaurantLocation;
 use Zmittapp\ApiBundle\Exception\InvalidFormException;
 use Zmittapp\ApiBundle\Exception\RessourceNotFoundException;
 use Zmittapp\ApiBundle\Form\Type\MenuItemType;
@@ -60,8 +61,9 @@ class RestaurantController extends FOSRestController
         $arr = array();
         $i = 0;
         foreach($restaurants as $restaurant) {
-            $arr[$i][0] = $restaurant;
-            $arr[$i][1] = array('distance' => $this->distance($restaurant->getLat(), $restaurant->getLon(), $lat, $lon));
+            $restaurantLocation = $restaurant->castToRestaurantLocation();
+            $restaurantLocation->setDistance($this->distance($restaurant->getLat(), $restaurant->getLon(), $lat, $lon));
+            $arr[$i] = $restaurantLocation;
             $i++;
         }
         return $arr;
