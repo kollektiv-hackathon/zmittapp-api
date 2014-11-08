@@ -14,9 +14,9 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
-use Zmittapp\ApiBundle\Entity\Restaurant;
+use Zmittapp\ApiBundle\Entity\User;
 use Zmittapp\ApiBundle\Exception\InvalidFormException;
-use Zmittapp\ApiBundle\Form\Type\RestaurantType;
+use Zmittapp\ApiBundle\Form\Type\UserType;
 
 /**
  * Class UserController
@@ -45,6 +45,38 @@ class UserController extends FOSRestController
     {
         $user = $this->get('zmittapp_api.domain_manager.user')->findOneBy(array('uid' => $uid));
         return $user->getRestaurants();
+    }
+
+
+    /**
+     * Create a new User
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   input = "Zmittapp\ApiBundle\Form\Type\UserType",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     400 = "Returned when the form has errors"
+     *   }
+     * )
+     *
+     * @Route("/", name="user_post", defaults={"_format" = "json"})
+     * @Method("POST")
+     * @Rest\View
+     *
+     */
+    public function postAction(Request $request){
+        try {
+            $form = $this->createForm(new UserType(), new User(), array('method' => 'POST'));
+            $new = $this->get('zmittapp_api.form_handler.user')->handle($form, $request);
+            $routeOptions = array(
+                'uid' => $new->getUid(),
+                '_format' => $request->get('_format')
+            );
+            return $this->routeRedirectView('user_get_subscriptions', $routeOptions, Codes::HTTP_CREATED);
+        }catch (InvalidFormException $exception) {
+            return $exception->getForm();
+        }
     }
 
 }

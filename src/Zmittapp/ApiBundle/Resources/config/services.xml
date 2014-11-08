@@ -40,6 +40,10 @@
             <argument type="service" id="zmittapp_api.domain_manager.menuitem" />
         </service>
 
+        <service id="zmittapp_api.form_handler.user" class="%zmittapp_api.form_handler.create_form.class%">
+            <argument type="service" id="zmittapp_api.domain_manager.user" />
+        </service>
+
     </services>
 
 </container>
