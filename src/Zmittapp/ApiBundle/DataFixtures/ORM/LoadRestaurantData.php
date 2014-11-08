@@ -15,6 +15,7 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Zmittapp\ApiBundle\Entity\MenuItem;
 use Zmittapp\ApiBundle\Entity\Restaurant;
+use Zmittapp\ApiBundle\Entity\User;
 
 
 class LoadRestaurantData extends AbstractFixture implements OrderedFixtureInterface {
@@ -85,8 +86,52 @@ class LoadRestaurantData extends AbstractFixture implements OrderedFixtureInterf
         $menuItem2->setVegetarian(true);
         $menuItem2->setRestaurant($restaurant);
 
+        $menuItem3 = new MenuItem();
+        $menuItem3->setDate('');
+        $menuItem3->setAppetizer('Gemüsesuppe');
+        $menuItem3->setMainCourse('Veganer Kebab');
+        $menuItem3->setDesert('Kokusnuss Mousse');
+        $menuItem3->setPrice(23.50);
+        $menuItem3->setVegan(true);
+        $menuItem3->setVegetarian(true);
+        $menuItem3->setRestaurant($restaurant2);
+
+        $menuItem4 = new MenuItem();
+        $menuItem4->setDate('');
+        $menuItem4->setAppetizer('Grillgemüse');
+        $menuItem4->setMainCourse('Reis');
+        $menuItem4->setDesert('Birne');
+        $menuItem4->setPrice(30.00);
+        $menuItem4->setVegan(true);
+        $menuItem4->setVegetarian(true);
+        $menuItem4->setRestaurant($restaurant2);
+
         $manager->persist($menuItem1);
         $manager->persist($menuItem2);
+        $manager->persist($menuItem3);
+        $manager->persist($menuItem4);
+
+
+        $user1 = new User();
+        $user1->setUid("11CF2061-9BC4-4D80-9C1B-A1055EF25455");
+        $user1->addRestaurant($restaurant);
+        $user1->addRestaurant($restaurant3);
+
+        $user2 = new User();
+        $user2->setUid("11CF2061-9BC4-4D80-9C1B-A1055EF25456");
+        $user2->addRestaurant($restaurant);
+        $user2->addRestaurant($restaurant4);
+        $user2->addRestaurant($restaurant5);
+
+        $user3 = new User();
+        $user3->setUid("11CF2061-9BC4-4D80-9C1B-A1055EF25457");
+        $user3->addRestaurant($restaurant);
+        $user3->addRestaurant($restaurant3);
+        $user3->addRestaurant($restaurant5);
+
+        $manager->persist($user1);
+        $manager->persist($user2);
+        $manager->persist($user3);
 
         $manager->flush();
     }

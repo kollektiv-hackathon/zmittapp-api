@@ -32,6 +32,14 @@ class DefaultManager {
         return $this->entityManager->getRepository($this->entityName)->find($id);
     }
 
+    public function findOneBy($args){
+        $entity = $this->entityManager->getRepository($this->entityName)->findOneBy($args);
+        if(!$entity){
+            throw new RessourceNotFoundException('Entity', "");
+        }
+        return $entity;
+    }
+
     public function findAll(){
         return $this->entityManager->getRepository($this->entityName)->findAll();
     }

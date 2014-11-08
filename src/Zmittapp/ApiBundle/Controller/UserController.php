@@ -38,12 +38,12 @@ class UserController extends FOSRestController
      * @return array
      *
      * @Method("GET")
-     * @Route("/{id}/subscriptions", name="user_get_subscriptions")
+     * @Route("/{uid}/subscriptions", name="user_get_subscriptions")
      * @Rest\View()
      */
-    public function getSubscribedRestaurantsAction($id)
+    public function getSubscribedRestaurantsAction($uid)
     {
-        $user = $this->get('zmittapp_api.domain_manager.user')->find($id);
+        $user = $this->get('zmittapp_api.domain_manager.user')->findOneBy(array('uid' => $uid));
         return $user->getRestaurants();
     }
 

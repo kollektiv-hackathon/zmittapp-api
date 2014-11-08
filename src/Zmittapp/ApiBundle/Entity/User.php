@@ -36,9 +36,9 @@ class User {
     private $id;
 
     /**
-     * @var integer;
+     * @var String;
      *
-     * @ORM\Column(name="uid", type="integer")
+     * @ORM\Column(name="uid", type="string")
      * @Assert\NotBlank(message="UID is missing!")
      *
      */
@@ -68,7 +68,7 @@ class User {
     /**
      * Set uid
      *
-     * @param integer $uid
+     * @param string $uid
      * @return User
      */
     public function setUid($uid)
@@ -81,7 +81,7 @@ class User {
     /**
      * Get uid
      *
-     * @return integer 
+     * @return string
      */
     public function getUid()
     {
