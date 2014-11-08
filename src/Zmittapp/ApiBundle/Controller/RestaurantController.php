@@ -66,6 +66,16 @@ class RestaurantController extends FOSRestController
             $arr[$i] = $restaurantLocation;
             $i++;
         }
+
+        $locationComparator = function(RestaurantLocation $r1, RestaurantLocation $r2){
+            if ($r1->getDistance() == $r2->getDistance()) {
+                return 0;
+            }
+            return ($r1->getDistance() < $r2->getDistance()) ? -1 : 1;
+        };
+
+        usort($arr, $locationComparator);
+
         return $arr;
     }
 
