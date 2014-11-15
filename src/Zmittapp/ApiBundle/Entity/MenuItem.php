@@ -106,6 +106,10 @@ class MenuItem {
      */
     private $vegan = false;
 
+    public function __construct(){
+        return $this->date = new DateTime();
+    }
+
     /**
      * Get id
      *

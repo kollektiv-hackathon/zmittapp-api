@@ -67,7 +67,7 @@ class LoadRestaurantData extends AbstractFixture implements OrderedFixtureInterf
         $manager->persist($restaurant5);
 
         $menuItem1 = new MenuItem();
-        $menuItem1->setDate('');
+        $menuItem1->setDate(new \DateTime());
         $menuItem1->setAppetizer('Gemischter Salat');
         $menuItem1->setMainCourse('Kalbsgeschnetzeltes mit Rösti');
         $menuItem1->setDesert('Schokoladen Mousse');
@@ -77,7 +77,7 @@ class LoadRestaurantData extends AbstractFixture implements OrderedFixtureInterf
         $menuItem1->setRestaurant($restaurant);
 
         $menuItem2 = new MenuItem();
-        $menuItem2->setDate('');
+        $menuItem2->setDate(new \DateTime());
         $menuItem2->setAppetizer('Suppe');
         $menuItem2->setMainCourse('Tofu Tatar');
         $menuItem2->setDesert('Apfel');
@@ -87,7 +87,7 @@ class LoadRestaurantData extends AbstractFixture implements OrderedFixtureInterf
         $menuItem2->setRestaurant($restaurant);
 
         $menuItem3 = new MenuItem();
-        $menuItem3->setDate('');
+        $menuItem3->setDate(new \DateTime());
         $menuItem3->setAppetizer('Gemüsesuppe');
         $menuItem3->setMainCourse('Veganer Kebab');
         $menuItem3->setDesert('Kokusnuss Mousse');
@@ -97,7 +97,7 @@ class LoadRestaurantData extends AbstractFixture implements OrderedFixtureInterf
         $menuItem3->setRestaurant($restaurant2);
 
         $menuItem4 = new MenuItem();
-        $menuItem4->setDate('');
+        $menuItem4->setDate(new \DateTime());
         $menuItem4->setAppetizer('Grillgemüse');
         $menuItem4->setMainCourse('Reis');
         $menuItem4->setDesert('Birne');
