@@ -355,7 +355,7 @@ class RestaurantController extends FOSRestController
         }
 
         $userManager = $this->get('zmittapp_api.domain_manager.user');
-        $user = $userManager->find($userId);
+        $user = $userManager->findOneBy(array('uid' => $userId));
         if(!$user){
             throw new RessourceNotFoundException('User', $userId);
         }
@@ -391,7 +391,7 @@ class RestaurantController extends FOSRestController
         }
 
         $userManager = $this->get('zmittapp_api.domain_manager.user');
-        $user = $userManager->find($userId);
+        $user = $userManager->findOneBy(array('uid' => $userId));
         if(!$user){
             throw new RessourceNotFoundException('User', $userId);
         }
