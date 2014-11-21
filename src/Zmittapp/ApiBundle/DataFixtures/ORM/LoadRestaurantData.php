@@ -27,6 +27,10 @@ class LoadRestaurantData extends AbstractFixture implements OrderedFixtureInterf
     {
         $restaurant = new Restaurant();
         $restaurant->setName('Kronenhalle');
+        $restaurant->setAddress('Rämistrasse 4');
+        $restaurant->setZip('8001');
+        $restaurant->setCity('Zürich');
+        $restaurant->setCountry('CH');
         $restaurant->setEmail('info@kornenhalle.ch');
         $restaurant->setPhone('+41 44 262 99 00');
         $restaurant->setLat(47.3676249);
@@ -34,6 +38,10 @@ class LoadRestaurantData extends AbstractFixture implements OrderedFixtureInterf
 
         $restaurant2 = new Restaurant();
         $restaurant2->setName('Aubrey');
+        $restaurant2->setAddress('Schiffbaustrasse 10');
+        $restaurant2->setZip('8005');
+        $restaurant2->setCity('Zürich');
+        $restaurant2->setCountry('CH');
         $restaurant2->setEmail('info@kornenhalle.ch');
         $restaurant2->setPhone('+41 44 440 00 20');
         $restaurant2->setLat(47.3891168);
@@ -41,6 +49,10 @@ class LoadRestaurantData extends AbstractFixture implements OrderedFixtureInterf
 
         $restaurant3 = new Restaurant();
         $restaurant3->setName('les halles');
+        $restaurant3->setAddress('Pfingstweidstrasse 6');
+        $restaurant3->setZip('8005');
+        $restaurant3->setCity('Zürich');
+        $restaurant3->setCountry('CH');
         $restaurant3->setEmail('info@leshalles.ch');
         $restaurant3->setPhone('+41 44 440 00 20');
         $restaurant3->setLat(47.3882397);
@@ -48,6 +60,10 @@ class LoadRestaurantData extends AbstractFixture implements OrderedFixtureInterf
 
         $restaurant4 = new Restaurant();
         $restaurant4->setName('Brasserie Lipp');
+        $restaurant4->setAddress('Uraniastrasse 9');
+        $restaurant4->setZip('8001');
+        $restaurant4->setCity('Zürich');
+        $restaurant4->setCountry('CH');
         $restaurant4->setEmail('info@lipp.ch');
         $restaurant4->setPhone('+41 44 440 00 20');
         $restaurant4->setLat(47.3744784);
@@ -55,6 +71,10 @@ class LoadRestaurantData extends AbstractFixture implements OrderedFixtureInterf
 
         $restaurant5 = new Restaurant();
         $restaurant5->setName('Bärengasse');
+        $restaurant5->setAddress('Bahnhofstrasse 25');
+        $restaurant5->setZip('8001');
+        $restaurant5->setCity('Zürich');
+        $restaurant5->setCountry('CH');
         $restaurant5->setEmail('info@restaurant-baerengasse.ch');
         $restaurant5->setPhone('+41 44 440 00 20');
         $restaurant5->setLat(47.3707062);

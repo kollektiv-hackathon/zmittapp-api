@@ -21,6 +21,10 @@ class RestaurantType extends AbstractType {
         $builder
             ->add('id', 'hidden', array('mapped' => false))
             ->add('name')
+            ->add('address')
+            ->add('city')
+            ->add('zip')
+            ->add('country')
             ->add('phone')
             ->add('email')
             ->add('lat')
