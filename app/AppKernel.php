@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new Zmittapp\ApiBundle\ZmittappApiBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
+            new Codag\RestFabricationBundle\CodagRestFabricationBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

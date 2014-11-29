@@ -11,7 +11,8 @@
 namespace Zmittapp\ApiBundle\DomainManager;
 
 use Zmittapp\ApiBundle\Entity\Restaurant;
-use Zmittapp\ApiBundle\Exception\RessourceNotFoundException;
+use Codag\RestFabricationBundle\RessourceNotFoundException;
+use Codag\RestFabricationBundle\DomainManager\DefaultManager;
 
 class MenuItemManager extends DefaultManager {
 

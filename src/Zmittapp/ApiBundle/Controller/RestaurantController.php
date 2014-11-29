@@ -4,7 +4,6 @@ namespace Zmittapp\ApiBundle\Controller;
 
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\RestBundle\Controller\Annotations as Rest,
     FOS\RestBundle\Controller\FOSRestController,
     FOS\RestBundle\Util\Codes;
@@ -13,16 +12,17 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 use Zmittapp\ApiBundle\Entity\MenuItem;
 use Zmittapp\ApiBundle\Entity\Restaurant;
 use Zmittapp\ApiBundle\Entity\RestaurantLocation;
-use Zmittapp\ApiBundle\Exception\InvalidFormException;
-use Zmittapp\ApiBundle\Exception\RessourceNotFoundException;
 use Zmittapp\ApiBundle\Form\Type\MenuItemType;
 use Zmittapp\ApiBundle\Form\Type\RestaurantType;
+
+use Codag\RestFabricationBundle\Exception\InvalidFormException,
+    Codag\RestFabricationBundle\Exception\RessourceNotFoundException;
 
 /**
  * Class RestaurantController

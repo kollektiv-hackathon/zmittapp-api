@@ -6,22 +6,19 @@
 
 
     <parameters>
-        <parameter key="zmittapp_api.domain_manager.default.class">Zmittapp\ApiBundle\DomainManager\DefaultManager</parameter>
         <parameter key="zmittapp_api.domain_manager.menuitem.class">Zmittapp\ApiBundle\DomainManager\MenuItemManager</parameter>
-
-        <parameter key="zmittapp_api.form_handler.create_form.class">Zmittapp\ApiBundle\Form\Handler\CreateFormHandler</parameter>
-
     </parameters>
 
     <services>
+
         <!-- Domain Managers -->
 
-        <service id="zmittapp_api.domain_manager.restaurant" class="%zmittapp_api.domain_manager.default.class%">
+        <service id="zmittapp_api.domain_manager.restaurant" class="%codag_rest_fabrication.domain_manager.default.class%">
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument>ZmittappApiBundle:Restaurant</argument>
         </service>
 
-        <service id="zmittapp_api.domain_manager.user" class="%zmittapp_api.domain_manager.default.class%">
+        <service id="zmittapp_api.domain_manager.user" class="%codag_rest_fabrication.domain_manager.default.class%">
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument>ZmittappApiBundle:User</argument>
         </service>
@@ -34,15 +31,15 @@
 
         <!-- Form Handlers -->
 
-        <service id="zmittapp_api.form_handler.restaurant" class="%zmittapp_api.form_handler.create_form.class%">
+        <service id="zmittapp_api.form_handler.restaurant" class="%codag_rest_fabrication.form_handler.create_form.class%">
             <argument type="service" id="zmittapp_api.domain_manager.restaurant" />
         </service>
 
-        <service id="zmittapp_api.form_handler.menuitem" class="%zmittapp_api.form_handler.create_form.class%">
+        <service id="zmittapp_api.form_handler.menuitem" class="%codag_rest_fabrication.form_handler.create_form.class%">
             <argument type="service" id="zmittapp_api.domain_manager.menuitem" />
         </service>
 
-        <service id="zmittapp_api.form_handler.user" class="%zmittapp_api.form_handler.create_form.class%">
+        <service id="zmittapp_api.form_handler.user" class="%codag_rest_fabrication.form_handler.create_form.class%">
             <argument type="service" id="zmittapp_api.domain_manager.user" />
         </service>
 

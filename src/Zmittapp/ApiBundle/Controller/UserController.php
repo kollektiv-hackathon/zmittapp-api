@@ -15,8 +15,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Zmittapp\ApiBundle\Entity\User;
-use Zmittapp\ApiBundle\Exception\InvalidFormException;
 use Zmittapp\ApiBundle\Form\Type\UserType;
+
+use Codag\RestFabricationBundle\Exception\InvalidFormException;
 
 /**
  * Class UserController
