@@ -223,7 +223,8 @@ class RestaurantController extends FOSRestController
         if(!$restaurant){
             throw new NotFoundHttpException('Restaurant not found with id: '. $id);
         }
-        return $restaurant->getMenuItems();
+
+        return $this->get('zmittapp_api.domain_manager.menuitem')->findUpcomingItems($restaurant, 2);
     }
 
     /**

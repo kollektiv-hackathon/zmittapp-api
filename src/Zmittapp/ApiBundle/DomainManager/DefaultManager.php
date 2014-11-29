@@ -16,8 +16,8 @@ use Zmittapp\ApiBundle\Exception\RessourceNotFoundException;
 
 
 class DefaultManager {
-    private $entityManager;
-    private $entityName;
+    protected $entityManager;
+    protected $entityName;
 
     public function __construct(EntityManager $entityManager, $entityName){
         $this->entityManager = $entityManager;
@@ -34,6 +34,14 @@ class DefaultManager {
 
     public function findOneBy($args){
         $entity = $this->entityManager->getRepository($this->entityName)->findOneBy($args);
+        if(!$entity){
+            throw new RessourceNotFoundException('Entity', "");
+        }
+        return $entity;
+    }
+
+    public function findBy($args){
+        $entity = $this->entityManager->getRepository($this->entityName)->findBy($args);
         if(!$entity){
             throw new RessourceNotFoundException('Entity', "");
         }

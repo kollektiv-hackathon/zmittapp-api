@@ -20,6 +20,7 @@ use Zmittapp\ApiBundle\Entity\User;
 
 class LoadRestaurantData extends AbstractFixture implements OrderedFixtureInterface {
 
+
     /**
      * {@inheritDoc}
      */
@@ -86,25 +87,36 @@ class LoadRestaurantData extends AbstractFixture implements OrderedFixtureInterf
         $manager->persist($restaurant4);
         $manager->persist($restaurant5);
 
-        $menuItem1 = new MenuItem();
-        $menuItem1->setDate(new \DateTime());
-        $menuItem1->setAppetizer('Gemischter Salat');
-        $menuItem1->setMainCourse('Kalbsgeschnetzeltes mit Rösti');
-        $menuItem1->setDesert('Schokoladen Mousse');
-        $menuItem1->setPrice(65.50);
-        $menuItem1->setVegan(false);
-        $menuItem1->setVegetarian(false);
-        $menuItem1->setRestaurant($restaurant);
 
-        $menuItem2 = new MenuItem();
-        $menuItem2->setDate(new \DateTime());
-        $menuItem2->setAppetizer('Suppe');
-        $menuItem2->setMainCourse('Tofu Tatar');
-        $menuItem2->setDesert('Apfel');
-        $menuItem2->setPrice(19.95);
-        $menuItem2->setVegan(false);
-        $menuItem2->setVegetarian(true);
-        $menuItem2->setRestaurant($restaurant);
+        $menuItem10 = new MenuItem();
+        $menuItem10->setDate($this->day());
+        $menuItem10->setAppetizer('Gemischter Salat');
+        $menuItem10->setMainCourse('Kalbsgeschnetzeltes mit Rösti');
+        $menuItem10->setDesert('Schokoladen Mousse');
+        $menuItem10->setPrice(65.50);
+        $menuItem10->setVegan(false);
+        $menuItem10->setVegetarian(false);
+        $menuItem10->setRestaurant($restaurant);
+
+        $menuItem11 = new MenuItem();
+        $menuItem11->setDate($this->day());
+        $menuItem11->setAppetizer('Suppe');
+        $menuItem11->setMainCourse('Tofu Tatar');
+        $menuItem11->setDesert('Apfel');
+        $menuItem11->setPrice(15.50);
+        $menuItem11->setVegan(false);
+        $menuItem11->setVegetarian(true);
+        $menuItem11->setRestaurant($restaurant);
+
+        $menuItem12 = new MenuItem();
+        $menuItem12->setDate($this->day(1));
+        $menuItem12->setAppetizer('Caprese');
+        $menuItem12->setMainCourse('Hackbraten');
+        $menuItem12->setDesert('Marroni Mousse');
+        $menuItem12->setPrice(39.90);
+        $menuItem12->setVegan(false);
+        $menuItem12->setVegetarian(false);
+        $menuItem12->setRestaurant($restaurant);
 
         $menuItem3 = new MenuItem();
         $menuItem3->setDate(new \DateTime());
@@ -126,8 +138,9 @@ class LoadRestaurantData extends AbstractFixture implements OrderedFixtureInterf
         $menuItem4->setVegetarian(true);
         $menuItem4->setRestaurant($restaurant2);
 
-        $manager->persist($menuItem1);
-        $manager->persist($menuItem2);
+        $manager->persist($menuItem10);
+        $manager->persist($menuItem11);
+        $manager->persist($menuItem12);
         $manager->persist($menuItem3);
         $manager->persist($menuItem4);
 
@@ -163,4 +176,13 @@ class LoadRestaurantData extends AbstractFixture implements OrderedFixtureInterf
     {
         return 1; // the order in which fixtures will be loaded
     }
+
+    private function  day($offset = 0){
+        $now = new \DateTime();
+        $now->format('Y-m-d');
+        $now->setTime(0, 0, 0);
+        if($offset == 0) return $now;
+        return $now->add(new \DateInterval('P'.$offset.'D'));
+    }
+
 } 
