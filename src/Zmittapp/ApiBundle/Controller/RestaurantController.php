@@ -22,7 +22,7 @@ use Zmittapp\ApiBundle\Form\Type\MenuItemType;
 use Zmittapp\ApiBundle\Form\Type\RestaurantType;
 
 use Codag\RestFabricationBundle\Exception\InvalidFormException,
-    Codag\RestFabricationBundle\Exception\RessourceNotFoundException;
+    Codag\RestFabricationBundle\Exception\ResourceNotFoundException;
 
 /**
  * Class RestaurantController
@@ -121,7 +121,7 @@ class RestaurantController extends FOSRestController
     {
         $restaurant = $this->get('zmittapp_api.domain_manager.restaurant')->find($id);
         if(!$restaurant){
-            throw new NotFoundHttpException('Restaurant not found with id: '. $id);
+            throw new ResourceNotFoundException('Restaurant', $id);
         }
         return $restaurant;
     }
@@ -138,7 +138,7 @@ class RestaurantController extends FOSRestController
      *   }
      * )
      *
-     * @Route("/", name="restaurant_post", defaults={"_format" = "json"})
+     * @Route("", name="restaurant_post", defaults={"_format" = "json"})
      * @Method("POST")
      * @Rest\View
      *
@@ -319,7 +319,7 @@ class RestaurantController extends FOSRestController
         $manager = $this->get('zmittapp_api.domain_manager.menuitem');
         $obj = $manager->find($itemId);
         if(!$obj){
-            throw new RessourceNotFoundException('MenuItem', $itemId);
+            throw new ResourceNotFoundException('MenuItem', $itemId);
         }
         $manager->delete($itemId);
 
@@ -352,13 +352,13 @@ class RestaurantController extends FOSRestController
     {
         $restaurant = $this->get('zmittapp_api.domain_manager.restaurant')->find($id);
         if(!$restaurant){
-            throw new RessourceNotFoundException('Restaurant', $id);
+            throw new ResourceNotFoundException('Restaurant', $id);
         }
 
         $userManager = $this->get('zmittapp_api.domain_manager.user');
         $user = $userManager->findOneBy(array('uid' => $userId));
         if(!$user){
-            throw new RessourceNotFoundException('User', $userId);
+            throw new ResourceNotFoundException('User', $userId);
         }
 
         //TODO: checks
@@ -388,13 +388,13 @@ class RestaurantController extends FOSRestController
     {
         $restaurant = $this->get('zmittapp_api.domain_manager.restaurant')->find($id);
         if(!$restaurant){
-            throw new RessourceNotFoundException('Restaurant', $id);
+            throw new ResourceNotFoundException('Restaurant', $id);
         }
 
         $userManager = $this->get('zmittapp_api.domain_manager.user');
         $user = $userManager->findOneBy(array('uid' => $userId));
         if(!$user){
-            throw new RessourceNotFoundException('User', $userId);
+            throw new ResourceNotFoundException('User', $userId);
         }
 
         //TODO: checks
