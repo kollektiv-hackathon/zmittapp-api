@@ -12,7 +12,7 @@ Restful API (built with Symfony2) to provide functionality for owners and users.
 The following demo accounts will be created during fixtures load:
 
 | Username       | Password  | Restaurant |
-|----------------|:----------|:-----------|
+|:---------------|:----------|:-----------|
 | info@aubrey.ch | secret    | Aubrey     |
 
 ## Access Token
@@ -31,6 +31,6 @@ The provided access token can be used either by providing an url parameter (1) o
 
 Supported scopes:
 
-| Scope    | Description      |
-|----------|:-----------------|
-| owner    | Restaurant owner |
+|Scope   | Description      |
+|:-------|:-----------------|
+| owner  | Restaurant owner |
