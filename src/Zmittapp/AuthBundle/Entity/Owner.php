@@ -34,17 +34,17 @@ class Owner implements AdvancedUserInterface, \Serializable, EquatableInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=25, unique=true)
+     * @ORM\Column(type="string", length=100, unique=true)
      */
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=32)
+     * @ORM\Column(type="string")
      */
     private $salt;
 
     /**
-     * @ORM\Column(type="string", length=40)
+     * @ORM\Column(type="string")
      */
     private $password;
 
