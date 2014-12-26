@@ -27,7 +27,7 @@ use Codag\RestFabricationBundle\Exception\InvalidFormException,
 /**
  * Class RestaurantController
  * @package Zmittapp\ApiBundle\Controller
- * @Route("/restaurants", name="restaurant_get")
+ * @Route("/restaurants")
  */
 class RestaurantController extends FOSRestController
 {
@@ -94,9 +94,10 @@ class RestaurantController extends FOSRestController
      *
      * @Method("GET")
      * @Route("/", name="restaurant_all")
-     * @Rest\View()
+     *
+     * @Rest\View(serializerGroups={"user"})
      */
-    public function getRestaurantsAction()
+    public function getAllRestaurantsAction()
     {
         return $this->get('zmittapp_api.domain_manager.restaurant')->findAll();
     }
@@ -115,9 +116,9 @@ class RestaurantController extends FOSRestController
      *
      * @Method("GET")
      * @Route("/{id}", name="restaurant_get")
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"user"})
      */
-    public function getAllRestaurantsAction($id)
+    public function getRestaurantAction($id)
     {
         $restaurant = $this->get('zmittapp_api.domain_manager.restaurant')->find($id);
         if(!$restaurant){

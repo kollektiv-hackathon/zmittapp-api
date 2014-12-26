@@ -34,17 +34,29 @@ class Owner implements AdvancedUserInterface, \Serializable, EquatableInterface
     private $id;
 
     /**
+     * @ORM\OneToOne(targetEntity="Zmittapp\ApiBundle\Entity\Restaurant", inversedBy="owner")
+     * @ORM\JoinTable(name="owner_restaurant")
+     *
+     * @Exclude
+     **/
+    private $restaurant;
+
+    /**
      * @ORM\Column(type="string", length=100, unique=true)
      */
     private $username;
 
     /**
      * @ORM\Column(type="string")
+     *
+     * @Exclude
      */
     private $salt;
 
     /**
      * @ORM\Column(type="string")
+     *
+     * @Exclude
      */
     private $password;
 
@@ -53,11 +65,19 @@ class Owner implements AdvancedUserInterface, \Serializable, EquatableInterface
      */
     private $enabled;
 
+    /**
+     * @var \Datetime
+     *
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
 
     public function __construct()
     {
         $this->enabled = true;
         $this->salt = md5(uniqid(null, true));
+        $this->createdAt = new \DateTime();
     }
 
     public function isEqualTo(UserInterface $user){
@@ -179,5 +199,76 @@ class Owner implements AdvancedUserInterface, \Serializable, EquatableInterface
     public function isEnabled()
     {
         return $this->enabled;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    
+
+    /**
+     * Set enabled
+     *
+     * @param boolean $enabled
+     * @return Owner
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    /**
+     * Get enabled
+     *
+     * @return boolean 
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Owner
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Set restaurant
+     *
+     * @param \Zmittapp\ApiBundle\Entity\Restaurant $restaurant
+     * @return Owner
+     */
+    public function setRestaurant(\Zmittapp\ApiBundle\Entity\Restaurant $restaurant = null)
+    {
+        $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    /**
+     * Get restaurant
+     *
+     * @return \Zmittapp\ApiBundle\Entity\Restaurant 
+     */
+    public function getRestaurant()
+    {
+        return $this->restaurant;
     }
 }

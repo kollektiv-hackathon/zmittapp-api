@@ -32,21 +32,32 @@ class Restaurant {
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      *
+     * @Groups({"owner", "user"})
+     *
      */
     private $id;
 
     /**
      * @ORM\ManyToMany(targetEntity="User", mappedBy="restaurants")
+     *
      * @Exclude
      **/
     private $users;
 
     /**
+     * @ORM\OneToOne(targetEntity="Zmittapp\AuthBundle\Entity\Owner", mappedBy="restaurant")
+     *
+     * @Groups({"owner"})
+     *
+     **/
+    private $owner;
+
+    /**
      * @var array
      *
      * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="restaurant")
-     * @Exclude
      *
+     * @Exclude
      */
     private $menuItems;
 
@@ -55,6 +66,8 @@ class Restaurant {
      *
      * @ORM\Column(name="name", type="string")
      * @Assert\NotBlank(message="Name is missing!")
+     *
+     * @Groups({"owner", "user"})
      *
      */
     private $name;
@@ -65,7 +78,7 @@ class Restaurant {
      * @ORM\Column(name="address", type="text")
      * @Assert\NotBlank(message="Address is missing!")
      *
-     *
+     * @Groups({"owner", "user"})
      */
     private $address;
 
@@ -75,7 +88,7 @@ class Restaurant {
      * @ORM\Column(name="zip", type="string", length=5)
      * @Assert\NotBlank(message="Zip code is missing!")
      *
-     *
+     * @Groups({"owner", "user"})
      */
     private $zip;
 
@@ -85,7 +98,7 @@ class Restaurant {
      * @ORM\Column(name="city", type="string", length=255)
      * @Assert\NotBlank(message="City is missing!")
      *
-     *
+     * @Groups({"owner", "user"})
      */
     private $city;
 
@@ -95,7 +108,7 @@ class Restaurant {
      * @ORM\Column(name="country", type="string", length=255)
      * @Assert\NotBlank(message="Country is missing!")
      *
-     *
+     * @Groups({"owner", "user"})
      */
     private $country;
 
@@ -105,6 +118,7 @@ class Restaurant {
      * @ORM\Column(name="phone", type="string")
      * @Assert\NotBlank(message="Phone is missing!")
      *
+     * @Groups({"owner", "user"})
      */
     private $phone;
 
@@ -114,6 +128,7 @@ class Restaurant {
      * @ORM\Column(name="email", type="string")
      * @Assert\NotBlank(message="Email is missing!")
      *
+     * @Groups({"owner", "user"})
      */
     private $email;
 
@@ -122,6 +137,8 @@ class Restaurant {
      *
      * @ORM\Column(name="lat", type="decimal", scale=7)
      * @Assert\NotBlank(message="lat is missing!")
+     *
+     * @Groups({"owner", "user"})
      *
      */
     private $lat;
@@ -132,6 +149,7 @@ class Restaurant {
      * @ORM\Column(name="lon", type="decimal", scale=7)
      * @Assert\NotBlank(message="long is missing!")
      *
+     * @Groups({"owner", "user"})
      */
     private $lon;
 
@@ -432,5 +450,28 @@ class Restaurant {
     public function getCountry()
     {
         return $this->country;
+    }
+
+    /**
+     * Set owner
+     *
+     * @param \Zmittapp\AuthBundle\Entity\Owner $owner
+     * @return Restaurant
+     */
+    public function setOwner(\Zmittapp\AuthBundle\Entity\Owner $owner = null)
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * Get owner
+     *
+     * @return \Zmittapp\AuthBundle\Entity\Owner 
+     */
+    public function getOwner()
+    {
+        return $this->owner;
     }
 }
