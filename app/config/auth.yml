@@ -1,0 +1,20 @@
+fos_oauth_server:
+    db_driver: orm
+    client_class: Zmittapp\AuthBundle\Entity\Client
+    access_token_class: Zmittapp\AuthBundle\Entity\AccessToken
+    refresh_token_class: Zmittapp\AuthBundle\Entity\RefreshToken
+    auth_code_class: Zmittapp\AuthBundle\Entity\AuthCode
+    model_manager_name: null
+    authorize:
+        form: { type: fos_oauth_server_authorize, handler: fos_oauth_server.authorize.form.handler.default, name: fos_oauth_server_authorize_form, validation_groups: [Authorize, Default] }
+    service:
+        storage: fos_oauth_server.storage.default
+        user_provider: zmittapp_auth.user.provider
+        client_manager: fos_oauth_server.client_manager.default
+        access_token_manager: fos_oauth_server.access_token_manager.default
+        refresh_token_manager: fos_oauth_server.refresh_token_manager.default
+        auth_code_manager: fos_oauth_server.auth_code_manager.default
+        options:
+            supported_scopes: owner
+    template:
+        engine: twig

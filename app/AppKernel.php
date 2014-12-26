@@ -27,6 +27,8 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
             new Codag\RestFabricationBundle\CodagRestFabricationBundle(),
+            new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
+            new Zmittapp\AuthBundle\ZmittappAuthBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
