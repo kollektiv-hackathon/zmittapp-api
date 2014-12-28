@@ -46,7 +46,7 @@ class RestaurantType extends AbstractType {
     }
 
     public function getName(){
-        return 'restaurant';
+        return 'profile';
     }
 
 } 
