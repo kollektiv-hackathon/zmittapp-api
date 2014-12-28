@@ -8,44 +8,33 @@
  * file that was distributed with this source code.
  */
 
-namespace Zmittapp\ApiBundle\Form\Type;
+namespace Zmittapp\AuthBundle\Form\Type;
 
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Zmittapp\AuthBundle\Form\Type\OwnerType;
 
-class RestaurantType extends AbstractType {
+class OwnerType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options){
         $builder
             ->add('id', 'hidden', array('mapped' => false))
-            ->add('owner', new OwnerType(), array(
-                'cascade_validation' => true
-            ))
-            ->add('name')
-            ->add('address')
-            ->add('city')
-            ->add('zip')
-            ->add('country')
-            ->add('phone')
-            ->add('email')
-            ->add('lat')
-            ->add('lon')
+            ->add('username')
+            ->add('password')
         ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'        => 'Zmittapp\ApiBundle\Entity\Restaurant',
+            'data_class'        => 'Zmittapp\AuthBundle\Entity\Owner',
             'csrf_protection'   => false
         ));
     }
 
     public function getName(){
-        return 'restaurant';
+        return 'owner';
     }
 
 } 

@@ -60,5 +60,35 @@ class ProfileController extends FOSRestController
         return $restaurant;
     }
 
+    /**
+     * Create a new restaurant profile
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   input = "Zmittapp\ApiBundle\Form\Type\RestaurantType",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     400 = "Returned when the form has errors"
+     *   }
+     * )
+     *
+     * @Route("", name="profile_post", defaults={"_format" = "json"})
+     * @Method("POST")
+     * @Rest\View
+     *
+     */
+    public function postAction(Request $request){
+        try {
+            $form = $this->createForm(new RestaurantType(), new Restaurant(), array('method' => 'POST'));
+            $new = $this->get('zmittapp_api.form_handler.restaurant')->handle($form, $request);
+            $routeOptions = array(
+                'id' => $new->getId(),
+                '_format' => $request->get('_format')
+            );
+            return $this->routeRedirectView('profile_get', $routeOptions, Codes::HTTP_CREATED);
+        }catch (InvalidFormException $exception) {
+            return $exception->getForm();
+        }
+    }
 
 }

@@ -11,7 +11,7 @@
 namespace Zmittapp\ApiBundle\DomainManager;
 
 use Zmittapp\ApiBundle\Entity\Restaurant;
-use Codag\RestFabricationBundle\RessourceNotFoundException;
+use Codag\RestFabricationBundle\Exception\ResourceNotFoundException;
 use Codag\RestFabricationBundle\DomainManager\DefaultManager;
 
 class MenuItemManager extends DefaultManager {
@@ -37,7 +37,7 @@ class MenuItemManager extends DefaultManager {
         try {
             return $qb->getQuery()->getResult();
         } catch (\Doctrine\ORM\NoResultException $e) {
-            throw new RessourceNotFoundException('Entity', "");
+            throw new ResourceNotFoundException('Entity', "");
         }
     }
 

@@ -43,6 +43,11 @@ class Owner implements AdvancedUserInterface, \Serializable, EquatableInterface
 
     /**
      * @ORM\Column(type="string", length=100, unique=true)
+     * @Assert\NotBlank(message="Username is missing!")
+     * @Assert\Email(
+     *     message = "Username '{{ value }}' is not a valid email address!.",
+     *     checkMX = true
+     * )
      */
     private $username;
 
@@ -55,6 +60,7 @@ class Owner implements AdvancedUserInterface, \Serializable, EquatableInterface
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Password is missing!")
      *
      * @Exclude
      */

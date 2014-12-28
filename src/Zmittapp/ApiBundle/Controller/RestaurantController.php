@@ -49,7 +49,7 @@ class RestaurantController extends FOSRestController
      *
      * @Method("GET")
      * @Route("/location", name="restaurant_location")
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"user"})
      *
      */
     public function locationAction(ParamFetcherInterface $paramFetcher)
@@ -128,37 +128,6 @@ class RestaurantController extends FOSRestController
     }
 
     /**
-     * Create a new Restaurant
-     *
-     * @ApiDoc(
-     *   resource = true,
-     *   input = "Zmittapp\ApiBundle\Form\Type\RestaurantType",
-     *   statusCodes = {
-     *     200 = "Returned when successful",
-     *     400 = "Returned when the form has errors"
-     *   }
-     * )
-     *
-     * @Route("", name="restaurant_post", defaults={"_format" = "json"})
-     * @Method("POST")
-     * @Rest\View
-     *
-     */
-    public function postRestaurantsAction(Request $request){
-        try {
-            $form = $this->createForm(new RestaurantType(), new Restaurant(), array('method' => 'POST'));
-            $new = $this->get('zmittapp_api.form_handler.restaurant')->handle($form, $request);
-            $routeOptions = array(
-                'id' => $new->getId(),
-                '_format' => $request->get('_format')
-            );
-            return $this->routeRedirectView('restaurant_get', $routeOptions, Codes::HTTP_CREATED);
-        }catch (InvalidFormException $exception) {
-            return $exception->getForm();
-        }
-    }
-
-    /**
      * Update an existing Restaurant
      *
      * @ApiDoc(
@@ -225,7 +194,7 @@ class RestaurantController extends FOSRestController
             throw new NotFoundHttpException('Restaurant not found with id: '. $id);
         }
 
-        return $this->get('zmittapp_api.domain_manager.menuitem')->findUpcomingItems($restaurant, 2);
+        return $this->get('zmittapp_api.domain_manager.menuitem')->findUpcomingItems($restaurant, 7);
     }
 
     /**
