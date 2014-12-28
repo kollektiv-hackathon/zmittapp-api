@@ -24,6 +24,7 @@ security:
 
         api:
             pattern:    ^/profile
+            methods: [GET, PUT, DELETE]
             fos_oauth:  true
             stateless:  true
             anonymous:  false # can be omitted as its default value

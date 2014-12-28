@@ -7,6 +7,7 @@
 
     <parameters>
         <parameter key="zmittapp_api.domain_manager.menuitem.class">Zmittapp\ApiBundle\DomainManager\MenuItemManager</parameter>
+        <parameter key="zmittapp_api.domain_manager.form_handler.create_restaurant_form.class">Zmittapp\ApiBundle\Form\Handler\CreateRestaurantFormHandler</parameter>
     </parameters>
 
     <services>
@@ -31,8 +32,9 @@
 
         <!-- Form Handlers -->
 
-        <service id="zmittapp_api.form_handler.restaurant" class="%codag_rest_fabrication.form_handler.create_form.class%">
+        <service id="zmittapp_api.form_handler.restaurant" class="%zmittapp_api.domain_manager.form_handler.create_restaurant_form.class%">
             <argument type="service" id="zmittapp_api.domain_manager.restaurant" />
+            <argument type="service" id="security.encoder_factory" />
         </service>
 
         <service id="zmittapp_api.form_handler.menuitem" class="%codag_rest_fabrication.form_handler.create_form.class%">

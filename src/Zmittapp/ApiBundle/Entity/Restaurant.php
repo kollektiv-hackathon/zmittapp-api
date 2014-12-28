@@ -15,6 +15,7 @@ use JMS\Serializer\Annotation\Exclude;
 use Symfony\Component\Validator\Constraints as Assert;
 use \DateTime;
 use JMS\Serializer\Annotation\Groups;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 /**
@@ -22,6 +23,7 @@ use JMS\Serializer\Annotation\Groups;
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @UniqueEntity("name", message="Restaurant name already used!")
  */
 class Restaurant {
 
@@ -45,7 +47,8 @@ class Restaurant {
     private $users;
 
     /**
-     * @ORM\OneToOne(targetEntity="Zmittapp\AuthBundle\Entity\Owner", mappedBy="restaurant")
+     * @ORM\OneToOne(targetEntity="Zmittapp\AuthBundle\Entity\Owner", mappedBy="restaurant", cascade={"persist"})
+     * @Assert\Valid()
      *
      * @Groups({"owner"})
      *
@@ -461,6 +464,7 @@ class Restaurant {
     public function setOwner(\Zmittapp\AuthBundle\Entity\Owner $owner = null)
     {
         $this->owner = $owner;
+        $this->owner->setRestaurant($this);
 
         return $this;
     }

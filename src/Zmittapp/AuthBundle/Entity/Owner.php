@@ -18,11 +18,14 @@ use JMS\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * Owner (Account for a restaurant)
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @UniqueEntity("username", message="Username already used!")
  */
 class Owner implements AdvancedUserInterface, \Serializable, EquatableInterface
 {
@@ -30,6 +33,8 @@ class Owner implements AdvancedUserInterface, \Serializable, EquatableInterface
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Groups({"owner"})
      */
     private $id;
 
@@ -48,6 +53,8 @@ class Owner implements AdvancedUserInterface, \Serializable, EquatableInterface
      *     message = "Username '{{ value }}' is not a valid email address!.",
      *     checkMX = true
      * )
+     *
+     * @Groups({"owner"})
      */
     private $username;
 
@@ -68,6 +75,8 @@ class Owner implements AdvancedUserInterface, \Serializable, EquatableInterface
 
     /**
      * @ORM\Column(name="enabled", type="boolean")
+     *
+     * @Groups({"owner"})
      */
     private $enabled;
 
@@ -75,6 +84,8 @@ class Owner implements AdvancedUserInterface, \Serializable, EquatableInterface
      * @var \Datetime
      *
      * @ORM\Column(name="created_at", type="datetime")
+     *
+     * @Groups({"owner"})
      */
     private $createdAt;
 
