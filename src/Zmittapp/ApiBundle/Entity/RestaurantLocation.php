@@ -25,6 +25,10 @@ use JMS\Serializer\Annotation\Groups;
  */
 class RestaurantLocation extends Restaurant {
 
+    /**
+     * @var double
+     * @Groups({"owner", "user"})
+     */
     private $distance;
 
     /**
