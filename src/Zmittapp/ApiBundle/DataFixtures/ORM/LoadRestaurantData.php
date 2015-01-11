@@ -167,6 +167,8 @@ class LoadRestaurantData extends AbstractFixture implements OrderedFixtureInterf
         $manager->persist($user3);
 
         $manager->flush();
+
+        $this->addReference('restaurant2', $restaurant2);
     }
 
     /**

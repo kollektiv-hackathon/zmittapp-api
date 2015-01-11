@@ -50,6 +50,7 @@ class LoadOwnerData extends AbstractFixture implements OrderedFixtureInterface, 
             ->getEncoder($user)
         ;
         $user->setPassword($encoder->encodePassword('secret', $user->getSalt()));
+        $user->setRestaurant($this->getReference('restaurant2'));
 
         $manager->persist($user);
         $manager->flush();
