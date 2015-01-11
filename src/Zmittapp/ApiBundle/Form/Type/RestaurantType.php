@@ -22,8 +22,7 @@ class RestaurantType extends AbstractType {
         $builder
             ->add('id', 'hidden', array('mapped' => false))
             ->add('owner', new OwnerType(), array(
-                'cascade_validation' => true,
-                'by_reference' => false
+                'cascade_validation' => true
             ))
             ->add('name')
             ->add('address')
