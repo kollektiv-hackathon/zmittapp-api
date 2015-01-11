@@ -44,7 +44,7 @@ class ProfileController extends FOSRestController
      *
      * @return array
      *
-     * @Route("", name="profile_get")
+     * @Route("", name="profile_get", defaults={"_format" = "json"})
      * @Method("GET")
      *
      * @Rest\View(serializerGroups={"owner"})
@@ -93,7 +93,7 @@ class ProfileController extends FOSRestController
     }
 
     /**
-     * Update an existing Restaurant
+     * Update an existing restaurant profile
      *
      * @ApiDoc(
      *  description="Update an existing Restaurant",
@@ -104,7 +104,7 @@ class ProfileController extends FOSRestController
      *  }
      * )
      *
-     * @Route("/{id}", name="restaurant_put", defaults={"_format" = "json"})
+     * @Route("/{id}", name="profile_put", defaults={"_format" = "json"})
      * @Method("PUT")
      * @Rest\View
      */
